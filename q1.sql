@@ -26,39 +26,39 @@ DROP VIEW IF EXISTS above_fourty CASCADE;
 -- Define views for your intermediate steps here.
 
 -- selects all year from 1996 to 2016 inclusive, with elections held during the years and paritipant countries
-create view elections_results ( year INT, election_id INT, country_id INT, party_id int, percent float) as
+create view elections_results( year INT, election_id INT, country_id INT, party_id int, percent float) as
     select extract( year from e_date), election.id, country_id, party_id, avg(votes / votes_valid), 
     from election join election_result on election.id == election_result.election_id
     where extract (year from e_date) >= 1996 and extract (year from e_date) <= 2016
                and country_id <> NULL and party_id <> NULL and votes_valid <> NULL and votes <> NULL
     group by extract( year from e_date), country_id, party_id;
 
-create view below_five (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view below_five(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(0-5]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent > 0.0 and percent <= 5.0;
 
-create view five_to_ten (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view five_to_ten(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(5-10]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent > 5.0 and percent <= 10.0;
 
-create view ten_to_twenty (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view ten_to_twenty(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(10-20]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent > 10.0 and percent <= 20.0;
 
-create view twenty_thirty (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view twenty_thirty(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(20-30]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent > 20.0 and percent <= 30.0;
 
-create view thirty_fourty (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view thirty_fourty(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(30-40]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent >30.0 and percent <= 40.0;
 
-create view above_fourty (year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
+create view above_fourty(year int, countryName varchar(50),voteRange varchar(20),partyName varchar(100)) as
     select year, country.name as 'countryName', '(40-100]' as voteRange, party.name
     from elections_results join country on elections_results.country_id == country.id
     where percent > 40.0 and percent <= 100.0;
