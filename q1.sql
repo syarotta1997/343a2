@@ -35,32 +35,32 @@ CREATE VIEW elections_results AS
 
 create view below_five as
     select year, country.name as countryName, '(0-5]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent > 0.0 and percent <= 5.0;
 
 create view five_to_ten as
     select year, country.name as countryName, '(5-10]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent > 5.0 and percent <= 10.0;
 
 create view ten_to_twenty as
     select year, country.name as countryName, '(10-20]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent > 10.0 and percent <= 20.0;
 
 create view twenty_thirty as
     select year, country.name as countryName, '(20-30]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent > 20.0 and percent <= 30.0;
 
 create view thirty_fourty as
     select year, country.name as countryName, '(30-40]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent >30.0 and percent <= 40.0;
 
 create view above_fourty as
     select year, country.name as countryName, '(40-100]' as voteRange, party.name
-    from elections_results join country on elections_results.country_id == country.id
+    from elections_results join country on elections_results.country_id = country.id
     where percent > 40.0 and percent <= 100.0;
 
 -- the answer to the query 
