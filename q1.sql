@@ -28,6 +28,8 @@ CREATE VIEW elections_results AS
                and country_id <> NULL and party_id <> NULL and votes_valid <> NULL and votes <> NULL
     group by extract( year from e_date), country_id, party_id;
 
+select * from elections_results;
+
 create view all_party_votes as
     (select year, country.name as countryName, '(0-5]' as voteRange, party_id
         from elections_results join country on elections_results.country_id = country.id
