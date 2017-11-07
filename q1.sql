@@ -28,8 +28,6 @@ CREATE VIEW elections_results AS
                and country_id is not NULL and party_id is not NULL and votes_valid is not NULL and votes is not NULL
     group by extract( year from e_date), country_id, party_id;
 
-select * from elections_results;
-
 create view all_party_votes as
     (select year, country.name as countryName, '(0-5]' as voteRange, percent, party_id
         from elections_results join country on elections_results.country_id = country.id
@@ -64,7 +62,7 @@ create view all_party_votes as
     (select year, country.name as countryName, '(40-100]' as voteRange, percent, party_id
             from elections_results join country on elections_results.country_id = country.id
             where percent > 40.0 and percent <= 100.0)
-    order by percent desc;
+    order by year desc, countryName desc, percent desc;
 
 create view answer as
     select year, countryName, voteRange, party.name
