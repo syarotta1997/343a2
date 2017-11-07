@@ -65,7 +65,7 @@ create view all_party_votes as
 
 create view answer as
     select year, countryName, voteRange, party.name
-    from all_party_votes  join party on all_votes.party_id = party.id;
+    from all_party_votes  join party on all_party_votes.party_id = party.id;
 
 -- the answer to the query 
 insert into q1
