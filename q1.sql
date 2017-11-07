@@ -70,7 +70,7 @@ create view all_party_votes as
                                     union (select * from ten_to_twenty as v3) 
                                     union (select * from twenty_thirty as v4) 
                                     union (select * from thirty_fourty  as v5)
-                                    union (select * from above_fourty as v6) ) all_votes join party on all_votes.party_id = party.id;
+                                    union (select * from above_fourty as v6) ) as all_votes join party on all_votes.party_id = party.id;
 
 -- the answer to the query 
 insert into q1
