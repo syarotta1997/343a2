@@ -16,13 +16,8 @@ partyName VARCHAR(100)
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
 DROP VIEW IF EXISTS elections_results CASCADE;
-DROP VIEW IF EXISTS below_five CASCADE;
-DROP VIEW IF EXISTS five_to_ten CASCADE;
-DROP VIEW IF EXISTS ten_to_twenty CASCADE;
-DROP VIEW IF EXISTS twenty_thirty CASCADE;
-DROP VIEW IF EXISTS thirty_fourty CASCADE;
-DROP VIEW IF EXISTS above_fourty CASCADE;
 DROP VIEW IF EXISTS all_party_votes CASCADE;
+DROP VIEW IF EXISTS answer CASCADE;
 -- Define views for your intermediate steps here.
 
 -- selects all year from 1996 to 2016 inclusive, with elections held during the years and paritipant countries
