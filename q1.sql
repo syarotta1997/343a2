@@ -25,7 +25,7 @@ CREATE VIEW elections_results AS
     select extract(year from e_date) as year, country_id, party_id, avg(votes / votes_valid) as percent 
     from election join election_result on election.id = election_result.election_id
     where extract(year from e_date) >= '1996' and extract(year from e_date) <= '2016'
-               and country_id <> NULL and party_id <> NULL and votes_valid <> NULL and votes <> NULL
+               and country_id is not NULL and party_id is not NULL and votes_valid is not NULL and votes is not NULL
     group by extract( year from e_date), country_id, party_id;
 
 select * from elections_results;
