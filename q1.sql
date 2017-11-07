@@ -63,7 +63,8 @@ create view all_party_votes as
 
     (select year, country.name as countryName, '(40-100]' as voteRange, party_id
             from elections_results join country on elections_results.country_id = country.id
-            where percent > 40.0 and percent <= 100.0);
+            where percent > 40.0 and percent <= 100.0)
+    order by voteRange desc;
 
 create view answer as
     select year, countryName, voteRange, party.name
