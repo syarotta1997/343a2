@@ -31,40 +31,40 @@ CREATE VIEW elections_results AS
 select * from elections_results;
 
 create view all_party_votes as
-    (select year, country.name as countryName, '(0-5]' as voteRange, party_id
+    (select year, country.name as countryName, '(0-5]' as voteRange, percent, party_id
         from elections_results join country on elections_results.country_id = country.id
         where percent > 0.0 and percent <= 5.0)
 
     union
 
-    (select year, country.name as countryName, '(5-10]' as voteRange, party_id
+    (select year, country.name as countryName, '(5-10]' as voteRange, percent, party_id
         from elections_results join country on elections_results.country_id = country.id
         where percent > 5.0 and percent <= 10.0)
 
     union
 
-    (select year, country.name as countryName, '(10-20]' as voteRange, party_id
+    (select year, country.name as countryName, '(10-20]' as voteRange, percent, party_id
         from elections_results join country on elections_results.country_id = country.id
         where percent > 10.0 and percent <= 20.0)
 
     union
 
-    (select year, country.name as countryName, '(20-30]' as voteRange, party_id
+    (select year, country.name as countryName, '(20-30]' as voteRange, percent, party_id
             from elections_results join country on elections_results.country_id = country.id
             where percent > 20.0 and percent <= 30.0)
 
     union
 
-    (select year, country.name as countryName, '(30-40]' as voteRange, party_id
+    (select year, country.name as countryName, '(30-40]' as voteRange, percent, party_id
             from elections_results join country on elections_results.country_id = country.id
             where percent >30.0 and percent <= 40.0)
 
     union
 
-    (select year, country.name as countryName, '(40-100]' as voteRange, party_id
+    (select year, country.name as countryName, '(40-100]' as voteRange, percent, party_id
             from elections_results join country on elections_results.country_id = country.id
             where percent > 40.0 and percent <= 100.0)
-    order by voteRange desc;
+    order by percent desc;
 
 create view answer as
     select year, countryName, voteRange, party.name
