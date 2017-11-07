@@ -70,5 +70,7 @@ create view answer as
 -- the answer to the query 
 insert into q1
     (select * from answer);
+
+select * from q1;
     
 
