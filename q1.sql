@@ -22,7 +22,7 @@ DROP VIEW IF EXISTS answer CASCADE;
 
 -- selects all year from 1996 to 2016 inclusive, with elections held during the years and paritipant countries
 CREATE VIEW elections_results AS
-    select extract(year from e_date) as year, country_id, party_id, avg(votes / votes_valid) as percent 
+    select extract(year from e_date) as year, country_id, party_id, avg( cast(votes as float) /votes_valid * 100) as percent 
     from election join election_result on election.id = election_result.election_id
     where extract(year from e_date) >= '1996' and extract(year from e_date) <= '2016'
                and country_id is not NULL and party_id is not NULL and votes_valid is not NULL and votes is not NULL
