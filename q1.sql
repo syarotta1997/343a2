@@ -65,12 +65,12 @@ create view above_fourty as
 
 create view all_party_votes as
     select year, countryName, voteRange, party.name
-    from (select * from below_five 
-                                    union five_to_ten 
-                                    union ten_to_twenty 
-                                    union twenty_thirty 
-                                    union thirty_fourty 
-                                    union above_fourty) all_votes join party on all_votes.party_id = party.id;
+    from (select * from (select * from below_five )
+                                    union (select * from five_to_ten )
+                                    union (select * from ten_to_twenty )
+                                    union (select * from twenty_thirty )
+                                    union (select * from thirty_fourty )
+                                    union (select * from above_fourty)) all_votes join party on all_votes.party_id = party.id;
 
 -- the answer to the query 
 insert into q1
