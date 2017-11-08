@@ -51,7 +51,7 @@ group by country.id;
 create view answer as
 select a.cid as countryId, a.pid1 as alliedPartyId1,a.pid2 as alliedPartyId2
 from total_ally_count as a join total_election on a.cid = total_election.cid
-where a.counts >= 0.3 * avg(total_election.total);
+where a.counts >= 0.3 * total_election.total;
 
 select * from answer;
 
