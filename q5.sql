@@ -39,7 +39,7 @@ where party.id not in (select in_cab.pid from in_cab where party.country_id = in
 create view all_cab_party_id as
 (select pid from in_cab)
 except
-(select pid from failed _party);
+(select pid from failed_party);
 
 select * from all_cab_party_id;
 
