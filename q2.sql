@@ -48,7 +48,7 @@ where p1.e_date >= ( select max(p2.e_date)
                                     where p1.pid = p2.pid);
 
 create view party_win_count as
-select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(eid) as wonElection
+select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(pw.eid) as wonElection
 from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
