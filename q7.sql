@@ -18,7 +18,7 @@ DROP VIEW IF EXISTS alliances CASCADE;
 DROP VIEW IF EXISTS alliances_reci CASCADE;
 DROP VIEW IF EXISTS total_ally_count CASCADE;
 DROP VIEW IF EXISTS total_election CASCADE;
-DROP VIEW IF EXISTS sum_alliances CASCADE;
+DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
 create view alliances as
@@ -43,14 +43,18 @@ from (select * from alliances union select * from alliances_reci) as a1
 group by a1.cid,a1.pid1,a1.pid2
 order by a1.pid1;
 
-select * from total_ally_count;
-
 create view total_election as
 select country.id as cid, count(election.id) as total
 from country join election on country.id = election.country_id
 group by country.id;
 
-select * from total_election;
+create view answer as
+select a.cid as countryId, a.pid1 as alliedPartyId1,a.pid2 as alliedPartyId2
+from total_ally_count as a join total_election on a.cid = total_election.cid
+where a.counts >= 0.3 * avg(total_election.total);
+
+select * from answer;
+
 
 
 -- the answer to the query 
