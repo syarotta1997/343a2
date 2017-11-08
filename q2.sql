@@ -55,7 +55,7 @@ create view won_gr_three as
 select country.name as countryName, p1.name as partyName, party_family.family as partyFamily, 
           p1.wonElections, p1.eid as mostRecentlyWonElectionId ,p1.year as mostRecentlyWonElectionYear
 from party_win_count as p1 join country on p1.cid = country.id join party_family on p1.pid = party_family.party_id
-where wonElections > 3 * avg( select wonElections 
+where wonElections > ( select 3 * avg(wonElections) 
                                                   from party_win_count as p2
                                                   where p1.cid = p2.cid and p1.pid <> p2.pid);
 select * from won_gr_three;
