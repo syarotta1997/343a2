@@ -28,7 +28,7 @@ where extract(year from start_date) >= '1996' and extract(year from start_date) 
 
 create view in_cab as
 select cp.party_id as pid, p.cid
-from past_canbinet_parties as p join cabinet_party as cp on p.id = cp.cabinet_id
+from past_cabinet_parties as p join cabinet_party as cp on p.id = cp.cabinet_id
 where cp.party_id is not null;
 
 create view failed_party as
