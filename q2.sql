@@ -66,7 +66,7 @@ select * from won_gr_three;
 create view answer as
 select w1.countryName, w1.partyName, party_family.family as partyFamily, 
          w1.eid as mostRecentlyWonElectionId, w1.year as mostRecentlyWonElectionYear
-from won_gr_three as w1 full join party_family on w1.pid = party_family.party_id;
+from won_gr_three as w1 left join party_family on w1.pid = party_family.party_id;
 
 
 select * from answer;
