@@ -54,7 +54,7 @@ group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 select * from party_win_count;
 
 create view won_gr_three as
-select p1.cid, p1.pid, p1.name, 1.eid, 1.year
+select p1.cid, p1.pid, p1.name, 1.eid, p1.year
 from party_win_count as p1
 where p1.wonElection > 3 * ( select  avg(p2.wonElection) 
                                                   from party_win_count as p2
