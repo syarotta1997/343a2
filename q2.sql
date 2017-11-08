@@ -55,7 +55,7 @@ group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
 create view all_party_in_country as
 select country.id as cid, count(party.id) as total
-from party join country on party.country_id = country.id
+from party right join country on party.country_id = country.id
 group by country.id;
 
 select * from all_party_in_country;
