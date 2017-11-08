@@ -13,12 +13,12 @@ create table q3(
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
-DROP VIEW IF EXISTS intermediate_step CASCADE;
+DROP VIEW IF EXISTS participation_ratio CASCADE;
 
 -- Define views for your intermediate steps here.
 
 CREATE VIEW participation_ratio AS
-    select extract(year from e_date) as year, country_id, avg( (votes_cast+0.0) /electrorate) as ratio
+    select extract(year from e_date) as year, country_id, avg( (votes_cast+0.0) /electorate) as ratio
     from election join election_result on election.id = election_result.election_id
     where extract(year from e_date) >= '2001' and extract(year from e_date) <= '2016'
                and country_id is not NULL and votes_cast is not NULL
