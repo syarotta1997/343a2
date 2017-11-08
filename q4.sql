@@ -28,7 +28,7 @@ DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
 create view parties_in_country as
-select country.id as cid, party.id as pid, party.left_right as position
+select country.id as cid, party.id as pid, party_position.left_right as position
 from party join country on party.country_id = country.id 
                  join party_position on party.id = party_position.party_id
 where party.left_right is not null;
