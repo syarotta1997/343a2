@@ -32,7 +32,7 @@ order by e1.party_id;
 
 create view alliances_reci as
 select a.cid, a.pid2, a.pid1, counts
-from alliances
+from alliances as a
 where a.pid1 > a.pid2;
 
 create view total_alliances as
