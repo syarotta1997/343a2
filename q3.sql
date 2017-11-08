@@ -47,7 +47,7 @@ create view increasing as
 create view answer as
 select not_increasing.cid, country.name as countryName, p.year as year, p.ratio as participationRatio
 from not_increasing join participation_ratio as p on  not_increasing.cid = p.cid
-        join country on increasing.cid = country.id;
+        join country on not_increasing.cid = country.id;
 
 
 select * from answer order by countryName desc, year desc;
