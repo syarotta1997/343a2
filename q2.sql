@@ -40,7 +40,7 @@ where p1.percentage >= (select max(percentage)
                                          where p1.eid = p2.eid and p1.pid <> p2.pid);
 
 create view win_w_recent as 
-select p1.pid, p1.eid,  extract(year from p1.e_date) as year
+select p1.pid, p1.name, p1.eid,  extract(year from p1.e_date) as year
 from party_wins as p1
 where p1.e_date >= ( select max(p2.e_date)
                                     from party_wins as p2
@@ -54,13 +54,20 @@ group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 select * from party_win_count;
 
 create view won_gr_three as
-select p1.cid, p1.pid, p1.name, p1.eid, p1.year
-from party_win_count as p1
+select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year
+from party_win_count as p1 join country on p1.cid = country.id
 where p1.wonElection > 3 * ( select  avg(p2.wonElection) 
                                                   from party_win_count as p2
                                                   where p1.cid = p2.cid and p1.pid <> p2.pid);
-select * from won_gr_three;
+
+create view answer as
+select w1.countryName, w1.partyName, party.family as partyFamily, 
+         w1.eid as mostRecentlyWonElectionId, w1.year as mostRecentlyWonElectionYear
+from won_gr_three as w1 join party_family on w1.pid = party_family.party_id;
+
+
+select * from answer;
 -- the answer to the query 
-insert into q2 (select * from won_gr_three);
+insert into q2 (select * from answer);
 
 
