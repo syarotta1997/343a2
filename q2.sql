@@ -53,11 +53,7 @@ select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(pw.eid) as wonElection
 from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
-create view all_party_in_country as
-select country.id as cid, count(party.id) as total
-from party join country on party.country_id = country.id
-group by country.id;
-
+select * from party_win_count;
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
@@ -68,8 +64,6 @@ where p1.wonElection > 3 * (select sum(p2.wonElection)/count(party.id)
                                             where party.country_id = p1.cid
                                             group by party.country_id);
                                                              
-
-
 create view answer as
 select w1.countryName, w1.partyName, party_family.family as partyFamily, wonElection as wonElections,
          w1.eid as mostRecentlyWonElectionId, w1.year as mostRecentlyWonElectionYear
