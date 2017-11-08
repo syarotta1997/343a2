@@ -16,7 +16,7 @@ CREATE TABLE q7(
 -- that define your intermediate steps.  (But give them better names!)
 DROP VIEW IF EXISTS alliances CASCADE;
 DROP VIEW IF EXISTS alliances_reci CASCADE;
-DROP VIEW IF EXISTS total_alliances CASCADE;
+DROP VIEW IF EXISTS total_ally_count CASCADE;
 DROP VIEW IF EXISTS total_election CASCADE;
 DROP VIEW IF EXISTS sum_alliances CASCADE;
 
@@ -37,8 +37,13 @@ where e1.party_id > e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
-select * from alliances;
-select * from alliances_reci;
+create view total_ally_count as
+select cid, pid1,pid2, sum(counts)
+from (select * from alliances) union (select * from alliances_reci)
+group by cid,pid1,pid2
+order by pid1;
+
+select * from total_ally_count;
 
 create view total_election as
 select country.id as cid, count(election.id) as total
