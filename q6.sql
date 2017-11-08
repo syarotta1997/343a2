@@ -47,8 +47,6 @@ from cabinet as c1 join country on c1.country_id = country.id
 where cp.pm = 't'
 order by countryName desc, startDate asc;
 
-select * from cabinets_notnull ;
-
 create view cabinets_null as
 select distinct(select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.start_date 
                                                                              and c1.country_id = c2.country_id ) as endDate,
@@ -62,7 +60,10 @@ from cabinet as c1 join country on c1.country_id = country.id
 where c1.id not in (select c2.cabinetId from cabinets_notnull as c2)
 order by countryName desc, startDate asc;
 
-select * from cabinets_null ;
+create view answer as
+(select * from cabinets_notnull )
+union
+(select * from cabinets_null )
 
 -- the answer to the query 
 insert into q6 (select countryName, cabinetId, startDate, endDate,pmParty from answer);
