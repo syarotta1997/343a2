@@ -49,8 +49,6 @@ union
 (select * from cabinets_notnull)
 order by countryName desc, startDate asc;
 
-select * from answer; 
-
 
 -- the answer to the query 
--- insert into q6 
+insert into q6 (select countryName, cabinetId, startDate, endDate,pmParty from answer);
