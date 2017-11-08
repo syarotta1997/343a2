@@ -67,7 +67,7 @@ group by r0_2.cid;
 
 create view answer as
 select country.name as countryName, r0_2, r2_4, r4_6, r6_8, r8_10
-from histogram join country on histofram.cid = country.id
+from histogram join country on histogram.cid = country.id
 group by country.name;
 
 select * from answer;
