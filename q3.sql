@@ -36,7 +36,7 @@ select * from participation_ratio order by year desc;
 -- choose countries
 create view not_increasing as
 select p1.cid, p1.year, p1.ratio
-from participation_ratio
+from participation_ratio as p1
 where p1.ratio > any( select p2.ratio 
                                   from participation_ratio as p2 
                                   where p1.year < p2. year and p1.cid = p2.cid);
