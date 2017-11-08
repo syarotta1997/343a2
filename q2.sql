@@ -65,6 +65,7 @@ from party_win_count as p1 join country on p1.cid = country.id
 where p1.wonElection > 3 * (select sum(p2.wonElection)/count(party.id) 
                                             from party join country on party.country_id = country.id
                                                              join party_win_count as p2 on party.country_id = p2.cid
+                                                             join p1 on p1.cid = party.country_id
                                              group by party.country_id);
                                                              
 
