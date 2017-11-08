@@ -21,6 +21,7 @@ DROP VIEW IF EXISTS party_results CASCADE;
 DROP VIEW IF EXISTS party_wins CASCADE;
 DROP VIEW IF EXISTS win_w_recent CASCADE;
 DROP VIEW IF EXISTS party_win_count CASCADE;
+DROP VIEW IF EXISTS all_party_in_country CASCADE;
 DROP VIEW IF EXISTS won_gr_three CASCADE;
 DROP VIEW IF EXISTS answer CASCADE;
 -- for each country, avg num of winning 
@@ -52,14 +53,18 @@ select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(pw.eid) as wonElection
 from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
+create view all_party_in_country as
+select country.id as cid , count(party.id) as pcount
+from party join country on country.id = party.country_id
+group by country.id
 
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
 from party_win_count as p1 join country on p1.cid = country.id
-where p1.wonElection > 3 * ( select  avg(p2.wonElection) 
-                                                  from party_win_count as p2
-                                                  where p1.cid = p2.cid);
+where p1.wonElection > 3 * ( select  sum(p2.wonElection)/a.pcount 
+                                                  from party_win_count as p2 join all_party_in_country as a
+                                                  where p1.cid = p2.cid=a.cid);
 
 
 create view answer as
