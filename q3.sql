@@ -14,6 +14,9 @@ create table q3(
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
 DROP VIEW IF EXISTS participation_ratio CASCADE;
+DROP VIEW IF EXISTS not_increasing CASCADE;
+DROP VIEW IF EXISTS increasing CASCADE;
+DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
 
@@ -31,15 +34,24 @@ CREATE VIEW participation_ratio AS
 select * from participation_ratio order by year desc;
 
 -- choose countries
-create view active_country as
-select p1.cid, country.name as countryName, p1.year, p1.ratio
-from participation_ratio as p1 join country on p1.cid = country.id
-where p1.ratio <= all( select ratio 
+create view not_increasing as
+select p1.cid
+from participation_ratio as p1
+where p1.ratio > any( select ratio 
                                   from participation_ratio as p2 
                                   where p1.year < p2. year and p1.cid = p2.cid);
 
-select * from active_country order by countryName desc, year desc;
+create view increasing as
+(select cid from participation_ratio) except (select cid from not_increasing);
+
+create view answer as
+select p1.cid, country.name as countryName, p1.year as year, p1.ratio as participationRatio
+from increasing join participation_ratio on  increasing.cid = participation_ratio.cid
+        join country on increasing.cid = country.id;
+
+
+select * from answer order by countryName desc, year desc;
 
 -- the answer to the query 
-insert into q3 (select * from active_country);
+insert into q3 (select * from answer);
 
