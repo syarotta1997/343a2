@@ -23,7 +23,7 @@ from election join election_result on election.id = election_result.election_id
 where country_id is not null
 order by party_id;
 
-select * from alliances_in_a_countryl;
+select * from alliances_in_a_country;
 
 
 -- the answer to the query 
