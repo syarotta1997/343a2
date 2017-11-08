@@ -28,5 +28,5 @@ select * from participation_ratio;
 
 
 -- the answer to the query 
-insert into q3 
+--insert into q3 
 
