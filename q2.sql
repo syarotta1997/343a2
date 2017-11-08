@@ -38,7 +38,7 @@ select p1.cid, p1.pid, party.name as name, p1.eid, p1.e_date
 from party_results as p1 join party on p1.pid = party.id
 where p1.percentage >= (select max(percentage)
                                          from party_results as p2
-                                         where p1.eid = p2.eid and p1.pid <> p2.pid);
+                                         where p1.eid = p2.eid);
 
 create view win_w_recent as 
 select p1.pid, p1.name, p1.eid,  extract(year from p1.e_date) as year
@@ -59,7 +59,7 @@ select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.yea
 from party_win_count as p1 join country on p1.cid = country.id
 where p1.wonElection > 3 * ( select  avg(p2.wonElection) 
                                                   from party_win_count as p2
-                                                  where p1.cid = p2.cid and p1.pid <> p2.pid);
+                                                  where p1.cid = p2.cid);
 
 
 create view answer as
