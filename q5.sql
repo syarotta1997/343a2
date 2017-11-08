@@ -47,8 +47,8 @@ select country.name as countryName, party.name as partyName, party_family.family
               party_position.state_market as stateMarket
 from all_cab_party_id as a join party on a.pid = party.id
                                         join country on party.country_id = country.id
-                                        full join party_family on a.pid = party_family.party_id
-                                        full join party_position on a.pid = party_position.party_id;
+                                        left join party_family on a.pid = party_family.party_id
+                                        left join party_position on a.pid = party_position.party_id;
 
 select * from answer;
 
