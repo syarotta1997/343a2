@@ -47,7 +47,7 @@ from cabinet as c1 join country on c1.country_id = country.id
                              join party on cp.party_id = party.id 
 order by countryName desc, startDate asc;
 
-select * from cabinets_notnull ;
+select * from cabinets_notnull order by cabinetId;
 
 create view answer as
 (select * from cabinets_null)
