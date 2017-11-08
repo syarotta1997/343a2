@@ -59,7 +59,7 @@ create view all_party_in_country as
 select country.id as cid, sum(p2.wonElection) as wins , count(party.id) as total, sum(p2.wonElection)/count(party.id) as average
 from party join country on party.country_id = country.id
                  join party_win_count as p2 on party.country_id = p2.cid
-group by party.country_id;
+group by country.id;
 
 select * from all_party_in_country;
 
