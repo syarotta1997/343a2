@@ -31,7 +31,7 @@ CREATE VIEW participation_ratio AS
                and country_id is not NULL and votes_cast is not NULL
     group by extract( year from e_date), country_id;
 
---select * from participation_ratio order by year desc;
+select * from participation_ratio order by year desc;
 
 -- choose countries
 create view not_increasing as
@@ -50,7 +50,7 @@ from increasing join participation_ratio as p on  increasing.cid = p.cid
         join country on increasing.cid = country.id;
 
 
---select * from answer order by countryName desc, year desc;
+select * from answer order by countryName desc, year desc;
 
 -- the answer to the query 
 insert into q3 (select countryName, year,participationRatio  from answer);
