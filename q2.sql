@@ -31,6 +31,8 @@ select election.id as eid, e_date, election.country_id as cid, party_id as pid, 
 from election join election_result on election.id = election_result.election_id
 where votes_valid is not null and party_id is not null and votes is not null and country_id is not null;
 
+select * from party_results;
+
 create view party_wins as
 select p1.cid, p1.pid, party.name as name, p1.eid, p1.e_date
 from party_results as p1 join party on p1.pid = party.id
