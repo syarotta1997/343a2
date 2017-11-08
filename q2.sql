@@ -51,6 +51,8 @@ select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(*) as wonElection
 from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
+select * from party_win_count;
+
 create view won_gr_three as
 select country.name as countryName, p1.name as partyName, party_family.family as partyFamily, 
           p1.wonElection, p1.eid as mostRecentlyWonElectionId ,p1.year as mostRecentlyWonElectionYear
