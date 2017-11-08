@@ -58,15 +58,15 @@ select country.id as cid, count(party.id) as total
 from party join country on party.country_id = country.id
 group by country.id;
 
-create view country_averages as
-select a.cid as cid, (sum(p.wonElection)/a.total) as average
-from all_party_in_country as a join party_win_count as p on a.cid = p.cid
-group by a.cid;
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
 from party_win_count as p1 join country on p1.cid = country.id
-where p1.wonElection > 3 * (select average from country_averages as c where c.cid = p1.cid);
+where p1.wonElection > 3 * (select sum(p2.wonElection)/count(party.id) 
+                                            from party join country on party.country_id = country.id
+                                                             join party_win_count as p2 on party.country_id = party_win_count.cid
+                                             group by party.country_id);
+                                                             
 
 
 create view answer as
