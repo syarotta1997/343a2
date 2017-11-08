@@ -59,7 +59,7 @@ select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.st
 from cabinet as c1 join country on c1.country_id = country.id
                              join cabinet_party as cp on c1.id = cp.cabinet_id
                              join party on cp.party_id = party.id 
-where c1.id not in (select c2.cabinetId from cabinets_notnull as c2 where c1.country_id = c2.country_id)
+where c1.id not in (select c2.cabinetId from cabinets_notnull as c2)
 order by countryName desc, startDate asc;
 
 select * from cabinets_null ;
