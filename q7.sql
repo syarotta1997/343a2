@@ -17,13 +17,16 @@ CREATE TABLE q7(
 DROP VIEW IF EXISTS alliances_in_a_country CASCADE;
 
 -- Define views for your intermediate steps here.
+
 create view alliances_in_a_country as
-select election.id, party_id, alliance_id
+select *
 from election join election_result on election.id = election_result.election_id
-where country_id is not null
+where country_id is not null and alliance_id is not null
 order by election.id, party_id;
 
 select * from alliances_in_a_country;
+
+
 
 
 -- the answer to the query 
