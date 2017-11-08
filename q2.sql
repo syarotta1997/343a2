@@ -36,14 +36,14 @@ select * from party_results;
 create view party_wins as
 select p1.cid, p1.pid, party.name as name, p1.eid, p1.e_date
 from party_results as p1 join party on p1.pid = party.id
-where p1.percentage >= max(select percentage
-                                               from party_results as p2
-                                               where p1.eid = p2.eid and p1.pid <> p2.pid);
+where p1.percentage >= (select max(percentage)
+                                         from party_results as p2
+                                         where p1.eid = p2.eid and p1.pid <> p2.pid);
 
 create view win_w_recent as 
 select p1.pid, p1.eid,  extract(year from p1.e_date) as year
 from party_wins as p1
-where p1.e_date >= max( select p2.e_date
+where p1.e_date >= ( select max(p2.e_date)
                                     from party_wins as p2
                                     where p1.pid = p2.pid);
 
