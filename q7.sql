@@ -38,10 +38,10 @@ group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
 create view total_ally_count as
-select cid, pid1,pid2, sum(counts)
-from (select * from alliances) union (select * from alliances_reci)
-group by cid,pid1,pid2
-order by pid1;
+select a1.cid, a1.pid1,a1.pid2, sum(counts)
+from (select * from alliances as a1) union (select * from alliances_reci as a2) 
+group by a1.cid,a1.pid1,a1.pid2
+order by a1.pid1;
 
 select * from total_ally_count;
 
