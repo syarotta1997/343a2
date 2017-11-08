@@ -56,7 +56,7 @@ group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 create view all_party_in_country as
 select country.id as cid , count(party.id) as pcount
 from party join country on country.id = party.country_id
-group by country.id
+group by country.id;
 
 
 create view won_gr_three as
