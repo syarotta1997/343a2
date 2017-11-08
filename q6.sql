@@ -26,7 +26,7 @@ select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.st
           c1.start_date as startDate,
           c1.id as cabinetId,
           null as pmParty,
-          country.name as countryName;
+          country.name as countryName
 from cabinet as c1 join country on c1.country_id = country.id
                              join cabinet_party on c1.id = cabinet_party.cabinet_id
 where cabinet_party.pm = 'f';
@@ -37,7 +37,7 @@ select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.st
           c1.start_date as startDate,
           c1.id as cabinetId,
           party.name as pmParty,
-          country.name as countryName;
+          country.name as countryName
 from cabinet as c1 join country on c1.country_id = country.id
                              join cabinet_party as cp on c1.id = cp.cabinet_id
                              join party on cp.party_id = party.id 
