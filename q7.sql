@@ -26,9 +26,9 @@ where country_id is not null and alliance_id is not null
 order by election.id, party_id;
 
 create view alliances as
-select e1.party_id as pid1, e2.party_id as pid2
+select e1.election_id, e1.party_id as pid1, e2.party_id as pid2
 from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
-where e1. party_id < e2.party_id
+where e1.election_id = e2.election_id and e1. party_id < e2.party_id
 order by e1.party_id;
 
 select * from alliances;
