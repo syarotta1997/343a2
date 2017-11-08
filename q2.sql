@@ -17,7 +17,11 @@ mostRecentlyWonElectionYear INT
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
-DROP VIEW IF EXISTS intermediate_step CASCADE;
+DROP VIEW IF EXISTS party_results CASCADE;
+DROP VIEW IF EXISTS party_wins CASCADE;
+DROP VIEW IF EXISTS win_w_recent CASCADE;
+DROP VIEW IF EXISTS party_win_count CASCADE;
+DROP VIEW IF EXISTS won_gr_three CASCADE;
 -- for each country, avg num of winning 
 -- Define views for your intermediate steps here.
 
@@ -25,7 +29,7 @@ DROP VIEW IF EXISTS intermediate_step CASCADE;
 create view party_results as
 select election.id as eid, e_date, election.country_id as cid,party.id as pid, ((votes+0.0)/votes_valid) as percentage
 from election join election_result on election.id = election_result.election_id
-where votes_valid is not null and party_id is not null votes is not null and country_id is not null;
+where votes_valid is not null and party_id is not null and votes is not null and country_id is not null;
 
 create view party_wins as
 select p1.cid, p1.pid, party.name as name, p1.eid, p1.e_date
