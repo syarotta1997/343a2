@@ -35,7 +35,7 @@ select * from participation_ratio order by year desc;
 
 -- choose countries
 create view answer as
-select p1.cid, country.name as countryName, p1.year, p1.ratio
+select p1.cid, country.name as countryName, p1.year, p1.ratio as participationRatio
 from participation_ratio as p1 join country on p1.cid = country.id
 where p1.ratio <= all( select p2.ratio 
                                   from participation_ratio as p2 
