@@ -64,7 +64,7 @@ where p.position >= 8 and p.position < 10
 group by cid;
 
 create view histogram as
-select r0_2.cid, r0_2.counts, r2_4.counts,r4_6.counts,r6_8.counts,r8_10.counts
+select r0_2.cid, r0_2.counts as r0_2, r2_4.counts as r2_4,r4_6.counts as r4_6,r6_8.counts as r6_8 ,r8_10.counts as r8_10
 from r0_2, r2_4, r4_6, r6_8, r8_10
 where r0_2.cid = r2_4.cid and r2_4.cid = r4_6.cid and r4_6.cid = r6_8.cid and r6_8.cid = r8_10.cid;
 
