@@ -36,7 +36,7 @@ from alliances as a
 where a.pid1 > a.pid2;
 
 create view total_alliances as
-select a1.cid, a1.pid1, a1.pid2, a1.counts+a1.counts as sum
+select a1.cid, a1.pid1, a1.pid2, sum(a1.counts+a2.counts) as sum
 from alliances as a1 join alliances_reci as a2 on a1.pid1 = a2.pid1 and a1.pid2=a2.pid2
 group by a1.cid, a1.pid1, a1.pid2;
 
