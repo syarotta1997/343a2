@@ -39,7 +39,7 @@ order by e1.party_id;
 
 create view total_ally_count as
 select a1.cid, a1.pid1,a1.pid2, sum(counts)
-from (select * from alliances as a1) union (select * from alliances_reci as a2) 
+from (select * from alliances) union (select * from alliances_reci) as a1 
 group by a1.cid,a1.pid1,a1.pid2
 order by a1.pid1;
 
