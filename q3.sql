@@ -23,7 +23,7 @@ DROP VIEW IF EXISTS answer CASCADE;
 --selects country with at least one election and calculates its participation ratio in year 2001 - 2016 inclusive
 CREATE VIEW participation_ratio AS
     select extract(year from e_date) as year, country_id as cid, avg( (votes_cast+0.0) /electorate) as ratio
-    from election join election_result on election.id = election_result.election_id
+    from election
     where extract(year from e_date) >= '2001' and extract(year from e_date) <= '2016'
                 -- this line below will eliminate any country who do not hold election during above years
                 -- need to enforce not-null on votes cast since it could be null, however electorate is already
