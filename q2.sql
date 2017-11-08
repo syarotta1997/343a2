@@ -52,7 +52,7 @@ select pw.cid, pw.pid, pw.name, wwr.eid, wwr.year, count(*) as wonElection
 from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
-select * from party_win_count;
+
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year
@@ -60,6 +60,8 @@ from party_win_count as p1 join country on p1.cid = country.id
 where p1.wonElection > 3 * ( select  avg(p2.wonElection) 
                                                   from party_win_count as p2
                                                   where p1.cid = p2.cid and p1.pid <> p2.pid);
+
+select * from won_gr_three;
 
 create view answer as
 select w1.countryName, w1.partyName, party_family.family as partyFamily, 
