@@ -54,11 +54,10 @@ from party_wins as pw join win_w_recent as wwr on pw.pid = wwr.pid
 group by pw.cid, pw.pid, pw.name, wwr.eid, wwr.year;
 
 create view all_party_in_country as
-select country.id as cid, ((sum(party_win_count.wonElection)+0.0) / count(party.id)) as average
+select country.id as cid, (sum(party_win_count.wonElection) / count(party.id)) as average
 from party join country on party.country_id = country.id join party_win_count on party.country_id = party_win_count.cid
 group by country.id;
 
-select * from all_party_in_country;
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
