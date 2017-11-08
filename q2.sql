@@ -58,6 +58,7 @@ select country.id as cid, (sum(party_win_count.wonElection) / count(party.id)) a
 from party join country on party.country_id = country.id join party_win_count on party.country_id = party_win_count.cid
 group by country.id;
 
+select * from all_party_in_country;
 
 create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
