@@ -44,6 +44,7 @@ select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.st
 from cabinet as c1 join country on c1.country_id = country.id
                              left join cabinet_party as cp on c1.id = cp.cabinet_id
                              join party on cp.party_id = party.id 
+where cp.pm = 't'
 order by countryName desc, startDate asc;
 
 select * from cabinets_notnull ;
