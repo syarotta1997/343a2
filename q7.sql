@@ -58,4 +58,4 @@ select * from answer;
 
 
 -- the answer to the query 
---insert into q7 
+insert into q7 (select * from answer);
