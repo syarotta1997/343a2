@@ -64,7 +64,7 @@ select r0_2.cid, count(r0_2.pid) as r0_2, count(r2_4.pid) as r2_4,
 from r0_2, r2_4, r4_6, r6_8, r8_10
 where r0_2.cid = r2_4.cid and r2_4.cid = r4_6.cid and r4_6.cid = r6_8.cid and r6_8.cid = r8_10.cid
 group by r0_2.cid;
-
+select * from histogram;
 create view answer as
 select country.name as countryName, r0_2, r2_4, r4_6, r6_8, r8_10
 from histogram join country on histogram.cid = country.id;
