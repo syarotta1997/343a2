@@ -31,7 +31,7 @@ create view parties_in_country as
 select country.id as cid, party.id as pid, party_position.left_right as position
 from party join country on party.country_id = country.id 
                  join party_position on party.id = party_position.party_id
-where party.left_right is not null;
+where party_position.left_right is not null;
 
 create view r0_2 as
 select cid,pid
