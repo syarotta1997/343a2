@@ -27,6 +27,13 @@ order by e1.party_id;
 
 select * from alliances;
 
+create view sum_alliances as
+select a1.cid,  a1.pid1, a1.pid2, sum(counts) as sums
+from alliances as a1, alliances as a2
+where a1.pid1 = a2.pid2 and a1.pid2 = a2.pid1 and a1.pid1 < a2.pid1
+group by a1.country_id, a1.pid1, a1.pid2
+order by a1.pid1;
+
 
 -- the answer to the query 
 --insert into q7 
