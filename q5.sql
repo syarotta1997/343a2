@@ -43,7 +43,7 @@ except
 (select pid from failed_party);
 
 create view answer as
-selection country.name as countryName, party.name as partyName, party_family.family as partyFamily, 
+select country.name as countryName, party.name as partyName, party_family.family as partyFamily, 
               party_position.stateMarket as stateMarket
 from all_cab_party_id as a join party on a.pid = party.id
                                         join country on party.country_id = country.id
