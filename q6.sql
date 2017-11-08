@@ -24,7 +24,7 @@ create view cabinets_null as
 select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.start_date 
                                                                              and c1.country_id = c2.country_id) as endDate,
           c1.start_date as startDate,
-          c1.id as cabinetId,
+          distinct c1.id as cabinetId,
           null as pmParty,
           country.name as countryName
 from cabinet as c1 join country on c1.country_id = country.id
@@ -38,7 +38,7 @@ create view cabinets_notnull as
 select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.start_date 
                                                                              and c1.country_id = c2.country_id ) as endDate,
           c1.start_date as startDate,
-          c1.id as cabinetId,
+          distinct c1.id as cabinetId,
           party.name as pmParty,
           country.name as countryName
 from cabinet as c1 join country on c1.country_id = country.id
