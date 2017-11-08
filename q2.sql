@@ -61,7 +61,7 @@ where p1.wonElection > 3 * ( select  avg(p2.wonElection)
                                                   where p1.cid = p2.cid and p1.pid <> p2.pid);
 
 create view answer as
-select w1.countryName, w1.partyName, party.family as partyFamily, 
+select w1.countryName, w1.partyName, party_family.family as partyFamily, 
          w1.eid as mostRecentlyWonElectionId, w1.year as mostRecentlyWonElectionYear
 from won_gr_three as w1 join party_family on w1.pid = party_family.party_id;
 
