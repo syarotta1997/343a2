@@ -14,8 +14,8 @@ CREATE TABLE q7(
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
-DROP VIEW IF EXISTS alliances_in_a_country CASCADE;
 DROP VIEW IF EXISTS alliances CASCADE;
+DROP VIEW IF EXISTS sum_alliances CASCADE;
 
 -- Define views for your intermediate steps here.
 create view alliances as
@@ -25,7 +25,7 @@ from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
-select * from alliances;
+
 
 create view sum_alliances as
 select a1.cid,  a1.pid1, a1.pid2, sum(counts) as sums
@@ -33,7 +33,7 @@ from alliances as a1, alliances as a2
 where a1.pid1 = a2.pid2 and a1.pid2 = a2.pid1 and a1.pid1 < a2.pid1
 group by a1.country_id, a1.pid1, a1.pid2
 order by a1.pid1;
-
+select * from sum_alliances;
 
 -- the answer to the query 
 --insert into q7 
