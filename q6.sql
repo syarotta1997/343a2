@@ -63,7 +63,7 @@ order by countryName desc, startDate asc;
 create view answer as
 (select * from cabinets_notnull )
 union
-(select * from cabinets_null )
+(select * from cabinets_null );
 
 -- the answer to the query 
 insert into q6 (select countryName, cabinetId, startDate, endDate,pmParty from answer);
