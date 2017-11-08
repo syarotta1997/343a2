@@ -27,7 +27,7 @@ DROP VIEW IF EXISTS won_gr_three CASCADE;
 
 -- party_result(eid,cid,pid,percentage)
 create view party_results as
-select election.id as eid, e_date, election.country_id as cid,party.id as pid, ((votes+0.0)/votes_valid) as percentage
+select election.id as eid, e_date, election.country_id as cid, party_id as pid, ((votes+0.0)/votes_valid) as percentage
 from election join election_result on election.id = election_result.election_id
 where votes_valid is not null and party_id is not null and votes is not null and country_id is not null;
 
