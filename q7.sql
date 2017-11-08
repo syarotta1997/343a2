@@ -25,27 +25,27 @@ create view alliances as
 select election.country_id as cid, e1.party_id as pid1, e2.party_id as pid2, count(election.id) as counts
 from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
          join election on e1.election_id = election.id
+where e1.party_id < e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
-
-
 create view alliances_reci as
-select a.cid, a.pid2 as pid1, a.pid1 as pid2, counts
-from alliances as a
-where a.pid1 > a.pid2;
+select election.country_id as cid, e2.party_id as pid1, e1.party_id as pid2, count(election.id) as counts
+from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
+         join election on e1.election_id = election.id
+where e1.party_id > e2.party_id
+group by election.country_id, e1.party_id, e2.party_id
+order by e1.party_id;
+
+select * from alliances;
+select * from alliances_reci;
 
 create view total_alliances as
-(select a1.cid, a1.pid1, a1.pid2, sum(a1.counts+a2.counts) as counts
+select a1.cid, a1.pid1, a1.pid2, sum(a1.counts+a2.counts) as sum
 from alliances as a1 join alliances_reci as a2 on a1.pid1 = a2.pid1 and a1.pid2=a2.pid2
-group by a1.cid, a1.pid1, a1.pid2)
-union
-(select * from alliances)
-except
-(select * from alliances_reci)
-group by cid, pid1,pid2,counts;
+group by a1.cid, a1.pid1, a1.pid2;
 
-select * from total_alliances;
+
 
 create view total_election as
 select country.id as cid, count(election.id) as total
