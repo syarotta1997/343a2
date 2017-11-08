@@ -22,7 +22,6 @@ create view alliances as
 select election.country_id as cid, e1.party_id as pid1, e2.party_id as pid2, count(election.id) as counts
 from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
          join election on e1.election_id = election.id
-where e1.election_id = e2.election_id and e1. party_id < e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
