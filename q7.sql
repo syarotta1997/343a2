@@ -29,7 +29,8 @@ order by e1.party_id;
 create view alliances_in_a_country as
 select eid, pid1,pid2
 from alliances join election on alliances.eid = election.id
-where country_id is not null;
+where country_id is not null
+order by pid1;
 select * from alliances_in_a_country;
 -- the answer to the query 
 --insert into q7 
