@@ -18,6 +18,7 @@ DROP VIEW IF EXISTS past_cabinet_parties CASCADE;
 DROP VIEW IF EXISTS in_cab CASCADE;
 DROP VIEW IF EXISTS failed_party CASCADE;
 DROP VIEW IF EXISTS all_cab_party_id CASCADE;
+DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
 create view past_cabinet_parties as
@@ -41,9 +42,15 @@ create view all_cab_party_id as
 except
 (select pid from failed_party);
 
-select * from all_cab_party_id;
+create view answer as
+selection country.name as countryName, party.name as partyName, party_family.family as partyFamily, 
+              party_position.stateMarket as stateMarket
+from all_cab_party_id as a join party on a.pid = party.id
+                                        join country on party.country_id = country.id
+                                        full join party_family on a.pid = party_family.party_id
+                                        full join party_position on a.pid = party_position.party_id;
 
-
+select * from answer;
 
 
 
