@@ -1,2 +1,2 @@
-select * from q4 order by countryName;
+select * from q6 order by countryName desc, startDate asc;
 
