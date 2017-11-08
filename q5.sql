@@ -14,7 +14,10 @@ CREATE TABLE q5(
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
-DROP VIEW IF EXISTS intermediate_step CASCADE;
+DROP VIEW IF EXISTS past_cabinet_parties CASCADE;
+DROP VIEW IF EXISTS in_cab CASCADE;
+DROP VIEW IF EXISTS failed_party CASCADE;
+DROP VIEW IF EXISTS all_cab_party_id CASCADE;
 
 -- Define views for your intermediate steps here.
 create view past_cabinet_parties as
