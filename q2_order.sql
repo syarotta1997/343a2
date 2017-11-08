@@ -1,2 +1,2 @@
-select * from q2 order by countryName, wonElection, (partyName desc);
+select * from q2 order by countryName asc, wonElection asc, partyName desc;
 
