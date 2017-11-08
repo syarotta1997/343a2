@@ -50,12 +50,5 @@ from all_cab_party_id as a join party on a.pid = party.id
                                         left join party_family on a.pid = party_family.party_id
                                         left join party_position on a.pid = party_position.party_id;
 
-select * from answer;
-
-
-
-
-
-
 -- the answer to the query 
--- insert into q5 
+insert into q5 (select * from answer);
