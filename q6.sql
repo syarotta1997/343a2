@@ -49,12 +49,20 @@ order by countryName desc, startDate asc;
 
 select * from cabinets_notnull ;
 
-create view answer as
-(select * from cabinets_null)
-union
-(select * from cabinets_notnull)
+create view cabinets_null as
+select (select min(c2.start_date) from cabinet as c2 where c1.start_date < c2.start_date 
+                                                                             and c1.country_id = c2.country_id ) as endDate,
+          c1.start_date as startDate,
+          c1.id as cabinetId,
+          null as pmParty,
+          country.name as countryName
+from cabinet as c1 join country on c1.country_id = country.id
+                             join cabinet_party as cp on c1.id = cp.cabinet_id
+                             join party on cp.party_id = party.id 
+where c1.id not in select (c2.cabinetId from cabinets_notnull as c2 where c1.country_id = c2.country_id)
 order by countryName desc, startDate asc;
 
+select * from cabinets_null ;
 
 -- the answer to the query 
 insert into q6 (select countryName, cabinetId, startDate, endDate,pmParty from answer);
