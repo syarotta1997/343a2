@@ -27,6 +27,12 @@ order by e1.party_id;
 
 select * from alliances;
 
+create view total_election as
+select country.id as cid, count(election.id) as total
+from country join election on country.id = election.country_id
+group by country.id;
+
+select * from total_election;
 
 create view sum_alliances as
 select a1.cid,  a1.pid1, a1.pid2, (a1.count + a2.count) as sums
