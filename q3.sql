@@ -45,7 +45,7 @@ create view increasing as
 (select cid from participation_ratio) except (select cid from not_increasing);
 
 create view answer as
-select p1.cid, country.name as countryName, p1.year as year, p1.ratio as participationRatio
+select increasing.cid, country.name as countryName, increasing.year as year, increasing.ratio as participationRatio
 from increasing join participation_ratio on  increasing.cid = participation_ratio.cid
         join country on increasing.cid = country.id;
 
