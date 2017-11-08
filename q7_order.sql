@@ -1,2 +1,2 @@
-select * from q4 order by countryName;
+select * from q7 order by countryId desc, alliedPartyId1 desc,alliedPartyId2 desc ;
 
