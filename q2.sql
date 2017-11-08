@@ -63,8 +63,8 @@ create view won_gr_three as
 select country.name as countryName, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
 from party_win_count as p1 join country on p1.cid = country.id
 where p1.wonElection > 3 * ( select  sum(p2.wonElection)/a.pcount 
-                                                  from party_win_count as p2 join all_party_in_country as a
-                                                  where p1.cid = p2.cid=a.cid);
+                                                  from party_win_count as p2 join all_party_in_country as a on p2.cid=a.cid
+                                                  where p1.cid = p2.cid);
 
 
 create view answer as
