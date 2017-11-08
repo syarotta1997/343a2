@@ -1,2 +1,2 @@
-select * from q1 order by (year ,countryName ,voteRange ,partyName) desc;
+select * from q1 order by year desc,countryName desc ,voteRange desc ,partyName desc;
 
