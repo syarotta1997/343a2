@@ -22,6 +22,7 @@ DROP VIEW IF EXISTS party_wins CASCADE;
 DROP VIEW IF EXISTS win_w_recent CASCADE;
 DROP VIEW IF EXISTS party_win_count CASCADE;
 DROP VIEW IF EXISTS won_gr_three CASCADE;
+DROP VIEW IF EXISTS answer CASCADE;
 -- for each country, avg num of winning 
 -- Define views for your intermediate steps here.
 
