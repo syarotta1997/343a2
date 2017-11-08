@@ -19,7 +19,7 @@ DROP VIEW IF EXISTS alliances_in_a_country CASCADE;
 -- Define views for your intermediate steps here.
 
 create view alliances_in_a_country as
-select election.id, election_result.id, party_id, alliance_id, country_id
+select election.id as eid, election_result.id as leaderid, party_id, alliance_id, country_id
 from election join election_result on election.id = election_result.election_id
 where country_id is not null and alliance_id is not null
 order by election.id, party_id;
