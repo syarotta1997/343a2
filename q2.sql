@@ -31,7 +31,6 @@ select election.id as eid, e_date, election.country_id as cid, party_id as pid, 
 from election join election_result on election.id = election_result.election_id
 where votes_valid is not null and party_id is not null and votes is not null and country_id is not null;
 
-select * from party_results;
 
 create view party_wins as
 select p1.cid, p1.pid, party.name as name, p1.eid, p1.e_date
@@ -56,7 +55,7 @@ create view won_gr_three as
 select country.name as countryName, p1.name as partyName, party_family.family as partyFamily, 
           p1.wonElections, p1.eid as mostRecentlyWonElectionId ,p1.year as mostRecentlyWonElectionYear
 from party_win_count as p1 join country join party_family on p1.cid = country.id and p1.pid = party_family.party_id
-group by country.name, p1.name, party_family.family, p1.wonElections, p1.eid,p1.year
+group by country.name, p1.name, party_family.family, p1.eid,p1.year
 having wonElections > 3 * avg( select count(wonElections) 
                                                   from party_win_count as p2
                                                   where p1.cid = p2.cid and p1.pid <> p2.pid);
