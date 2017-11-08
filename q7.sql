@@ -30,7 +30,7 @@ order by e1.party_id;
 create view sum_alliances as
 select a1.cid,  a1.pid1, a1.pid2, (a1.count + a2.count) as sums
 from alliances as a1, alliances as a2
-where a1.pid1 = a2.pid2 and a1.pid2 = a2.pid1 and a1.pid1 < a2.pid1
+where a1.pid1 = a2.pid2 and a1.pid2 = a2.pid1
 group by a1.cid, a1.pid1, a1.pid2
 order by a1.pid1;
 select * from sum_alliances;
