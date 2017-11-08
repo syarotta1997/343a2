@@ -28,7 +28,7 @@ DROP VIEW IF EXISTS answer CASCADE;
 -- for each country, avg num of winning 
 -- Define views for your intermediate steps here.
 
--- party_result(eid,cid,pid,percentage)
+-- First
 create view party_results as
 select election.id as eid, e_date, election.country_id as cid, party_id as pid, ((votes+0.0)/votes_valid) as percentage
 from election join election_result on election.id = election_result.election_id
@@ -65,15 +65,16 @@ from total join party_win_count as p on total.cid = p.cid
 group by total.cid;
 
 create view won_gr_three as
-select p1.cid, p1.pid, p1.name as partyName, p1.eid, p1.year,p1.wonElection
+select p1.cid, p1.pid, p1.name, p1.eid, p1.year,p1.wonElection
 from party_win_count as p1
 where p1.wonElection > 3 * (select average from average where average.cid = p1.cid);
                                                              
 create view answer as
-select country.name as countryName, w1.partyName, party_family.family as partyFamily, wonElection as wonElections,
-         w1.eid as mostRecentlyWonElectionId, w1.year as mostRecentlyWonElectionYear
+select country.name as countryName, w1.name as partyName, party_family.family as partyFamily, 
+          wonElection as wonElections, w1.eid as mostRecentlyWonElectionId, 
+           w1.year as mostRecentlyWonElectionYear
 from won_gr_three as w1 left join party_family on w1.pid = party_family.party_id
-                                            join country on w1.cid = country.id;
+                                             join country on w1.cid = country.id;
 
 
 -- the answer to the query 
