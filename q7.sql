@@ -43,6 +43,8 @@ from (select * from alliances union all select * from alliances_reci) as a1
 group by cid,pid1,pid2
 order by pid1;
 
+select * from total_ally_count order by cid,pid1;
+
 create view total_election as
 select country.id as cid, count(election.id) as total
 from country join election on country.id = election.country_id
