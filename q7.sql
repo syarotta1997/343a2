@@ -14,6 +14,7 @@ CREATE TABLE q7(
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
+DROP VIEW IF EXISTS elections_results CASCADE;
 DROP VIEW IF EXISTS alliances CASCADE;
 DROP VIEW IF EXISTS alliances_reci CASCADE;
 DROP VIEW IF EXISTS total_ally_count CASCADE;
