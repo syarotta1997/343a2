@@ -31,14 +31,14 @@ create view alliances as
 select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
 from elections_results as e1 join elections_results as e2 on e1.aid = e2.rid
 where e1.pid < e2.pid
-group by election.country_id, e1.pid, e2.pid
+group by e1.cid, e1.pid, e2.pid
 order by e1.pid;
 
 create view alliances_reci as
 select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
 from elections_results as e1 join elections_results as e2 on e1.aid = e2.rid
 where e1.pid > e2.pid
-group by election.country_id, e1.pid, e2.pid
+group by e1.cid, e1.pid, e2.pid
 order by e1.pid;
 
 create view total_ally_count as
