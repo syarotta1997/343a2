@@ -34,15 +34,13 @@ select cp.id, cp.party_id as pid, p.cid
 from all_past_cab as p join cabinet_party as cp on p.id = cp.cabinet_id
 where cp.party_id is not null;
 
-select * from in_cab order by cid, id ;
-
 create view all_cab_all_party as
-select party.id as pid
+select all_past_cab.id, party.id as pid
 from party join all_past_cab on party.country_id = all_past_cab.cid;
 
 create view failed_party as
 select distinct pid
-from (select pid from all_cab_all_party except select pid from in_cab) as result;
+from (select * from all_cab_all_party except select id,pid from in_cab) as result;
 
 create view all_cab_party_id as
 (select pid from in_cab)
