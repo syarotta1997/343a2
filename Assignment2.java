@@ -84,7 +84,7 @@ public class Assignment2 extends JDBCSubmission {
         													 	+ "where election.country_id = cabinet.country_id and "
         													 				+ "election.e_date > cast( ? as date) and "
         													 				+ "election.e_type = cast(? as election_type)) "
-        				+ "order by cabinet.start_date";
+        				+ "order by cabinet.start_date desc";
         		c_statement = this.connection.prepareStatement(cabinet_query);
             	c_statement.setInt(1, cid);
             	c_statement.setString(2, date);
