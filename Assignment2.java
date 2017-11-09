@@ -22,7 +22,6 @@ public class Assignment2 extends JDBCSubmission {
     		Properties props = new Properties();
     		props.setProperty("user",username);
     		props.setProperty("password",password);
-    		props.setProperty("ssl","true");
     		props.setProperty("currentSchema", "parlgov");
     		this.connection = DriverManager.getConnection(url, props);
     		return this.connection.isValid(0);
