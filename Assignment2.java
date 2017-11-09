@@ -68,7 +68,7 @@ public class Assignment2 extends JDBCSubmission {
         	
         	e_statement = connection.prepareStatement(election_query);
         	e_statement.setString(1, countryName);
-        	election_result = e_statement.executeQuery(election_query);
+        	election_result = e_statement.executeQuery();
         	while (election_result.next()) {
         		int election_id = election_result.getInt("id");
         		int cid = election_result.getInt("cid");
@@ -87,7 +87,7 @@ public class Assignment2 extends JDBCSubmission {
             	c_statement.setString(1, date);
             	c_statement.setInt(2, cid);
             	c_statement.setString(3, type);
-            	cabinet_result = c_statement.executeQuery(cabinet_query );
+            	cabinet_result = c_statement.executeQuery();
             	while (cabinet_result.next()) {
             		int cab_id = cabinet_result.getInt("id");
             		String d = cabinet_result.getString("start_date");
