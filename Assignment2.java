@@ -97,7 +97,7 @@ public class Assignment2 extends JDBCSubmission {
         	answer = new ElectionCabinetResult(elections,cabinets);
         }
         catch(SQLException se){
-            System.err.println("disconnectDB." +
+            System.err.println("electionSequence." +
                     "<Message>: " + se.getMessage());
         }
 		return answer;
