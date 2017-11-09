@@ -49,7 +49,7 @@ group by a1.cid, a1.pid1, a1.pid2;
 create view total_election as
 select country.id as cid, count(election.id) as total
 from country join election on country.id = election.country_id
-where election.e_type = 'Parliamentary election'
+--where election.e_type = 'Parliamentary election'
 group by country.id;
 
 select * from total_election;
