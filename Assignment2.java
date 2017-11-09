@@ -77,12 +77,12 @@ public class Assignment2 extends JDBCSubmission {
         		String type = election_result.getString("type");
         		
         		cabinet_query = ""
-        				+ "select cabinet.id, cabinet.start_date"
-        				+ "from cabinet join election on cabinet.country_id = election.country_id"
-        				+ "where cabinet.start_date >= ? and"
-        				+ "cabinet.start_date < (select min(e_date) from country join election on country.id = election.country_id"
+        				+ "select cabinet.id, cabinet.start_date "
+        				+ "from cabinet join election on cabinet.country_id = election.country_id "
+        				+ "where cabinet.start_date >= ? and "
+        				+ "cabinet.start_date < (select min(e_date) from country join election on country.id = election.country_id "
         				+ "where election.country_id = cabinet.country_id and election.country_id = ? and "
-        				+ "election.e_type = ?)"
+        				+ "election.e_type = ?) "
         				+ "order by cabinet.start_date";
         		c_statement = this.connection.prepareStatement(cabinet_query);
             	c_statement.setString(1, date);
