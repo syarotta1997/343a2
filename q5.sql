@@ -38,11 +38,11 @@ create view all_cab_all_party as
 select all_past_cab.id, party.id as pid
 from party join all_past_cab on party.country_id = all_past_cab.cid;
 
-select id,pid from all_cab_all_party order by id;
-
 create view failed_party as
 select distinct pid
 from (select * from all_cab_all_party except select id,pid from in_cab) as result;
+
+select * from failed_party order by pid;
 
 create view all_cab_party_id as
 (select pid from in_cab)
