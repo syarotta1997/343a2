@@ -70,6 +70,7 @@ public class Assignment2 extends JDBCSubmission {
         	e_statement = this.connection.prepareStatement(election_query);
         	e_statement.setString(1, countryName);
         	election_result = e_statement.executeQuery();
+        	System.out.println("election querty done with success");
         	while (election_result.next()) {
         		int election_id = election_result.getInt("id");
         		int cid = election_result.getInt("cid");
@@ -77,13 +78,13 @@ public class Assignment2 extends JDBCSubmission {
         		String type = election_result.getString("type");
         		
         		cabinet_query = ""
-        				+ "select id, start_date"
+        				+ "select cabinet.id, cabinet.start_date"
         				+ "from cabinet join election on cabinet.country_id = election.country_id"
         				+ "where cabinet.start_date >= ? and"
         				+ "cabinet.start_date < (select min(e_date) from country join election on country.id = election.country_id"
-        				+ "where election.country_id = cabinet.country_id and election.country_id = ? and"
+        				+ "where election.country_id = cabinet.country_id and election.country_id = ? and "
         				+ "election.e_type = ?)"
-        				+ "order by start_date";
+        				+ "order by cabinet.start_date";
         		c_statement = this.connection.prepareStatement(cabinet_query);
             	c_statement.setString(1, date);
             	c_statement.setInt(2, cid);
