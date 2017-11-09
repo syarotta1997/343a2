@@ -64,9 +64,10 @@ public class Assignment2 extends JDBCSubmission {
         	election_query = ""
         			+ "select election.country_id as cid, election.id as eid, eleciton.e_date as date, election.e_type as type"
         			+ "from country join election on country.id = election.country_id "
-        			+ "where country.name = ? order by extract(year from e_date) desc";
+        			+ "where country.name = ? "
+        			+ "order by extract(year from e_date) desc";
         	
-        	e_statement = connection.prepareStatement(election_query);
+        	e_statement = this.connection.prepareStatement(election_query);
         	e_statement.setString(1, countryName);
         	election_result = e_statement.executeQuery();
         	while (election_result.next()) {
@@ -83,7 +84,7 @@ public class Assignment2 extends JDBCSubmission {
         				+ "where election.country_id = cabinet.country_id and election.country_id = ? and"
         				+ "election.e_type = ?)"
         				+ "order by start_date";
-        		c_statement = connection.prepareStatement(cabinet_query);
+        		c_statement = this.connection.prepareStatement(cabinet_query);
             	c_statement.setString(1, date);
             	c_statement.setInt(2, cid);
             	c_statement.setString(3, type);
@@ -123,31 +124,22 @@ public class Assignment2 extends JDBCSubmission {
 	    		System.out.println("DB connect failed");
 	    		System.exit(0);
 	    	}
-	    	System.out.println("connection successful");
-	    	String q = "select * from election";
-	    	PreparedStatement qq = test.connection.prepareStatement(q);
-	    	ResultSet rr = qq.executeQuery();
-	    	while (rr.next()) {
-	    		int id = rr.getInt("id");
-	    		System.out.println(id);
-	    	}
+	    	
+	    	test.electionSequence("Canada");
+
+
 	    	
 	    	boolean s = test.disconnectDB();
 	    	if (! s) {
 	    		System.out.println("DB disconnect failed");
 	    		System.exit(0);
 	    	}
-	    	System.out.println("disconnection successful");
 	    	
 	    	
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 catch(SQLException se){
-            System.err.println("main." +
-                    "<Message>: " + se.getMessage());
-        }
     	
     	
     	
