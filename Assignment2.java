@@ -89,6 +89,9 @@ public class Assignment2 extends JDBCSubmission {
             	c_statement.setInt(2, cid);
             	c_statement.setString(3, type);
             	cabinet_result = c_statement.executeQuery();
+            	
+            	System.out.println("cabinet query done with success");
+            	
             	while (cabinet_result.next()) {
             		int cab_id = cabinet_result.getInt("id");
             		String d = cabinet_result.getString("start_date");
