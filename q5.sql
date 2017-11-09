@@ -27,7 +27,7 @@ from cabinet
 where extract(year from start_date) >= '1996' and extract(year from start_date) <= '2016' and
            cabinet.country_id is not null;
 
-select * from all_past_cab;
+select * from all_past_cab order by cid;
 
 create view in_cab as
 select cp.party_id as pid, p.cid
