@@ -21,18 +21,21 @@ DROP VIEW IF EXISTS total_election CASCADE;
 DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
+create view elections_results as
+select country_id as cid, e1.id as eid, e2.id as rid, e2.party_id as pid, e2.alliance_id as aid
+from election as e1 join election_result as e2 on e1.id = e2.election_id
+where country_id is not null;
+
 create view alliances as
-select election.country_id as cid, e1.party_id as pid1, e2.party_id as pid2, count(election.id) as counts
-from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
-         join election on e1.election_id = election.id
+select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
+from elections_results as e1, elections_results as e2 on e1.alliance_id = e2.id
 where e1.party_id < e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
 create view alliances_reci as
-select election.country_id as cid, e2.party_id as pid1, e1.party_id as pid2, count(election.id) as counts
-from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
-         join election on e1.election_id = election.id
+select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
+from elections_results as e1, elections_results as e2 on e1.alliance_id = e2.id
 where e1.party_id > e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
@@ -47,7 +50,6 @@ select * from total_ally_count order by cid,pid1;
 create view total_election as
 select country.id as cid, count(election.id) as total
 from country join election on country.id = election.country_id
-where e_type = 'Parliamentary election'
 group by country.id;
 
 create view answer as
