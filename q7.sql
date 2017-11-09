@@ -28,14 +28,14 @@ where country_id is not null;
 
 create view alliances as
 select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
-from elections_results as e1, elections_results as e2 on e1.alliance_id = e2.id
+from elections_results as e1 join elections_results as e2 on e1.alliance_id = e2.id
 where e1.party_id < e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
 create view alliances_reci as
 select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
-from elections_results as e1, elections_results as e2 on e1.alliance_id = e2.id
+from elections_results as e1 join elections_results as e2 on e1.alliance_id = e2.id
 where e1.party_id > e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
