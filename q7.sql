@@ -29,6 +29,8 @@ where e1.party_id < e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
 
+select * from alliances order by cid,pid1;
+
 create view alliances_reci as
 select election.country_id as cid, e2.party_id as pid1, e1.party_id as pid2, count(election.id) as counts
 from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
@@ -36,6 +38,8 @@ from election_result as e1 join election_result as e2 on e1.alliance_id = e2.id
 where e1.party_id > e2.party_id
 group by election.country_id, e1.party_id, e2.party_id
 order by e1.party_id;
+
+select * from alliances_reci order by cid,pid1;
 
 create view total_ally_count as
 select cid, pid1, pid2, sum(counts) as counts
