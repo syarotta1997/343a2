@@ -56,7 +56,7 @@ select * from total_election;
 create view answer as
 select a.cid as countryId, a.pid1 as alliedPartyId1,a.pid2 as alliedPartyId2
 from total_ally_count as a join total_election on a.cid = total_election.cid
-where a.counts >=  cast( (0.3 * total_election.total) as numeric);
+where a.counts >=  0.3 * total_election.total as numeric;
 
 -- the answer to the query 
 insert into q7 (select * from answer);
