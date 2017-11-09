@@ -75,7 +75,7 @@ public class Assignment2 extends JDBCSubmission {
         		int cid = election_result.getInt("cid");
         		String date = election_result.getString("date");
         		String type = election_result.getString("type");
-        		System.out.println("  "+election_id+"    "+date+"    "+type+"    "+cid);
+        		System.out.println("  "+election_id+"    "+date+"    "+type+"    "+cid+"\n");
         		cabinet_query = ""
         				+ "select distinct cabinet.id, cabinet.start_date "
         				+ "from cabinet join election on cabinet.country_id = election.country_id "
@@ -98,7 +98,7 @@ public class Assignment2 extends JDBCSubmission {
                     System.out.println("   "+election_id +"   "+ cab_id +"   "+ d);
             	}
             	
-            	System.out.println("\n\n");
+            	System.out.println("\n");
             	
         	}
         	answer = new ElectionCabinetResult(elections,cabinets);
