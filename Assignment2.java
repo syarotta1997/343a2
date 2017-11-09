@@ -124,6 +124,12 @@ public class Assignment2 extends JDBCSubmission {
 	    		System.exit(0);
 	    	}
 	    	System.out.println("connection successful");
+	    	
+	    	test.electionSequence("Canada");
+	    	
+	    	
+	    	
+	    	
 	    	boolean s = test.disconnectDB();
 	    	if (! s) {
 	    		System.out.println("DB disconnect failed");
