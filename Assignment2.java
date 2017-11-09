@@ -61,7 +61,8 @@ public class Assignment2 extends JDBCSubmission {
         String election_query,cabinet_query;
         try {
         	
-        	election_query = "select election.country_id as cid, election.id as eid, election.e_date as date, election.e_type as type from country join election on country.id = election.country_id "
+        	election_query = "select election.country_id as cid, election.id as eid, election.e_date as date, election.e_type as type "
+        			+ "from country join election on country.id = election.country_id "
         			+ "where country.name = ? "
         			+ "order by extract(year from e_date) desc";
         	
@@ -70,9 +71,9 @@ public class Assignment2 extends JDBCSubmission {
         	election_result = e_statement.executeQuery();
         	System.out.println("election querty done with success");
         	while (election_result.next()) {
-        		int election_id = election_result.getInt("id");
+        		int election_id = election_result.getInt("eid");
         		int cid = election_result.getInt("cid");
-        		String date = election_result.getString("e_date");
+        		String date = election_result.getString("date");
         		String type = election_result.getString("type");
         		
         		cabinet_query = ""
