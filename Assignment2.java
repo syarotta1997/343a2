@@ -18,8 +18,7 @@ public class Assignment2 extends JDBCSubmission {
     public boolean connectDB(String url, String username, String password) {
     	try
         {
-    		String path = url+"currentSchema=parlgov";
-    		this.connection = DriverManager.getConnection(path, username, password);
+    		this.connection = DriverManager.getConnection(url, username, password);
     		return this.connection.isValid(0);
         }
         catch (SQLException se)
@@ -111,7 +110,7 @@ public class Assignment2 extends JDBCSubmission {
     	Assignment2 test;
 		try {
 			test = new Assignment2();
-			String url = "jdbc:postgresql://localhost:5432/csc343h-luke6/";
+			String url = "jdbc:postgresql://localhost:5432/csc343h-luke6";
 	    	String uid = "luke6";
 	    	String pw = "";
 	    	boolean r = test.connectDB(url, uid, pw);
