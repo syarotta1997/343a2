@@ -132,15 +132,9 @@ public class Assignment2 extends JDBCSubmission {
 	    		System.out.println("DB connect failed");
 	    		System.exit(0);
 	    	}
-	    	String query = "select * from country";
-	    	PreparedStatement pp = test.connection.prepareStatement(query);
-	    	ResultSet rr = pp.executeQuery();
-	    	while (rr.next()) {
-	    		System.out.println(rr.getString("name"));
-	    	}
 	    	
 	    	
-	    	System.out.println(test.electionSequence("Canada"));
+	    	System.out.println(test.electionSequence("Germany"));
 
 
 	    	
