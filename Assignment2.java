@@ -75,9 +75,9 @@ public class Assignment2 extends JDBCSubmission {
         		int cid = election_result.getInt("cid");
         		String date = election_result.getString("date");
         		String type = election_result.getString("type");
-        		System.out.println(""+election_id+"    "+date+"    "+type+"    "+cid);
+        		System.out.println("  "+election_id+"    "+date+"    "+type+"    "+cid);
         		cabinet_query = ""
-        				+ "select cabinet.id, cabinet.start_date "
+        				+ "select distinct cabinet.id, cabinet.start_date "
         				+ "from cabinet join election on cabinet.country_id = election.country_id "
         				+ "where cabinet.country_id = ? and cabinet.start_date >= cast( ? as date) and "
         				+ "cabinet.start_date < (select min(e_date) from election "
