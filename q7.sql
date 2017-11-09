@@ -47,6 +47,7 @@ select * from total_ally_count order by cid,pid1;
 create view total_election as
 select country.id as cid, count(election.id) as total
 from country join election on country.id = election.country_id
+where e_type = 'Parliamentary election'
 group by country.id;
 
 create view answer as
