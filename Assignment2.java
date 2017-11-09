@@ -116,14 +116,15 @@ public class Assignment2 extends JDBCSubmission {
 	    	boolean r = test.connectDB(url, uid, pw);
 	    	if (! r) {
 	    		System.out.println("DB connect failed");
+	    		System.exit(0);
 	    	}
 	    	System.out.println("connection successful");
 	    	boolean s = test.disconnectDB();
 	    	if (! s) {
 	    		System.out.println("DB disconnect failed");
-	    		
+	    		System.exit(0);
 	    	}
-	    	
+	    	System.out.println("connection successful");
 	    	
 	    	
 		} catch (ClassNotFoundException e) {
