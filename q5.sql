@@ -42,12 +42,12 @@ create view failed_party as
 select distinct pid
 from (select * from all_cab_all_party except select id,pid from in_cab) as result;
 
-select * from failed_party order by pid;
-
 create view all_cab_party_id as
 (select pid from in_cab)
 except
 (select pid from failed_party);
+
+select * from all_cab_party_id order by pid;
 
 create view answer as
 select country.name as countryName, party.name as partyName, party_family.family as partyFamily, 
