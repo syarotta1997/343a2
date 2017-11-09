@@ -39,7 +39,7 @@ order by e1.party_id;
 
 create view total_ally_count as
 select cid, pid1, pid2, sum(counts) as counts
-from (select * from alliances union select * from alliances_reci) as a1 
+from (select * from alliances union all select * from alliances_reci) as a1 
 group by cid,pid1,pid2
 order by pid1;
 
@@ -51,7 +51,7 @@ group by country.id;
 create view answer as
 select a.cid as countryId, a.pid1 as alliedPartyId1,a.pid2 as alliedPartyId2
 from total_ally_count as a join total_election on a.cid = total_election.cid
-where a.counts >= 0.3 * total_election.total;
+where a.counts >=  cast( (0.3 * total_election.total) as numeric);
 
 -- the answer to the query 
 insert into q7 (select * from answer);
