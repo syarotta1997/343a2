@@ -82,7 +82,7 @@ public class Assignment2 extends JDBCSubmission {
         				+ "where cabinet.country_id = ? and cabinet.start_date >= cast( ? as date) and "
         				+ "cabinet.start_date < (select min(e_date) from election "
         													 	+ "where election.country_id = cabinet.country_id and "
-        													 				+ "election.e_date > ? and "
+        													 				+ "election.e_date > cast( ? as date) and "
         													 				+ "election.e_type = cast(? as election_type)) "
         				+ "order by cabinet.start_date";
         		c_statement = this.connection.prepareStatement(cabinet_query);
