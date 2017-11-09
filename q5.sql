@@ -14,14 +14,14 @@ CREATE TABLE q5(
 
 -- You may find it convenient to do this for each of the views
 -- that define your intermediate steps.  (But give them better names!)
-DROP VIEW IF EXISTS past_cabinet_parties CASCADE;
+DROP VIEW IF EXISTS all_past_cab CASCADE;
 DROP VIEW IF EXISTS in_cab CASCADE;
 DROP VIEW IF EXISTS failed_party CASCADE;
 DROP VIEW IF EXISTS all_cab_party_id CASCADE;
 DROP VIEW IF EXISTS answer CASCADE;
 
 -- Define views for your intermediate steps here.
-create view past_cabinet_parties as
+create view all_past_cab as
 select cabinet.country_id as cid, cabinet.id
 from cabinet
 where extract(year from start_date) >= '1996' and extract(year from start_date) <= '2016' and
@@ -29,12 +29,12 @@ where extract(year from start_date) >= '1996' and extract(year from start_date) 
 
 create view in_cab as
 select cp.party_id as pid, p.cid
-from past_cabinet_parties as p join cabinet_party as cp on p.id = cp.cabinet_id
+from all_past_cab as p join cabinet_party as cp on p.id = cp.cabinet_id
 where cp.party_id is not null;
 
 create view failed_party as
 select party.id as pid
-from party join country on party.country_id = country.id
+from party join all_past_cab on party.country_id = all_past_cab.cid
 where party.id not in (select in_cab.pid from in_cab where party.country_id = in_cab.cid);
 
 create view all_cab_party_id as
