@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.sql.*;
 import java.io.*;
 
@@ -18,7 +19,12 @@ public class Assignment2 extends JDBCSubmission {
     public boolean connectDB(String url, String username, String password) {
     	try
         {
-    		this.connection = DriverManager.getConnection(url, username, password);
+    		Properties props = new Properties();
+    		props.setProperty("user",username);
+    		props.setProperty("password",password);
+    		props.setProperty("ssl","true");
+    		props.setProperty("currentSchema", "parlgov");
+    		this.connection = DriverManager.getConnection(url, props);
     		return this.connection.isValid(0);
         }
         catch (SQLException se)
@@ -124,7 +130,7 @@ public class Assignment2 extends JDBCSubmission {
 	    		System.out.println("DB disconnect failed");
 	    		System.exit(0);
 	    	}
-	    	System.out.println("connection successful");
+	    	System.out.println("disconnection successful");
 	    	
 	    	
 		} catch (ClassNotFoundException e) {
