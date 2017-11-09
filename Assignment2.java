@@ -80,7 +80,7 @@ public class Assignment2 extends JDBCSubmission {
         				+ "select cabinet.id, cabinet.start_date "
         				+ "from cabinet join election on cabinet.country_id = election.country_id "
         				+ "where cabinet.country_id = ? and cabinet.start_date >= cast( ? as date) and "
-        				+ "cabinet.start_date < (select min(e_date) from election"
+        				+ "cabinet.start_date < (select min(e_date) from election "
         													 	+ "where election.country_id = cabinet.country_id and "
         													 				+ "election.e_date > ? and "
         													 				+ "election.e_type = cast(? as election_type)) "
