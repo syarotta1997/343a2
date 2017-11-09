@@ -95,7 +95,7 @@ public class Assignment2 extends JDBCSubmission {
             	while (cabinet_result.next()) {
             		int cab_id = cabinet_result.getInt("id");
             		String d = cabinet_result.getString("start_date");
-                    System.out.println("   " +election_id + cab_id + d);
+                    System.out.println("   "+election_id +"   "+ cab_id +"   "+ d);
             	}
         	}
         	answer = new ElectionCabinetResult(elections,cabinets);
