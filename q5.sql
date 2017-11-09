@@ -16,6 +16,7 @@ CREATE TABLE q5(
 -- that define your intermediate steps.  (But give them better names!)
 DROP VIEW IF EXISTS all_past_cab CASCADE;
 DROP VIEW IF EXISTS in_cab CASCADE;
+DROP VIEW IF EXISTS all_cab_all_party CASCADE;
 DROP VIEW IF EXISTS failed_party CASCADE;
 DROP VIEW IF EXISTS all_cab_party_id CASCADE;
 DROP VIEW IF EXISTS answer CASCADE;
@@ -33,12 +34,15 @@ select cp.id, cp.party_id as pid, p.cid
 from all_past_cab as p join cabinet_party as cp on p.id = cp.cabinet_id
 where cp.party_id is not null;
 
-select * from in_cab order by cid, id;
+select * from in_cab order by cid, id ;
+
+create view all_cab_all_party as
+select party.id as pid
+from party join all_past_cab on party.country_id = all_past_cab.cid;
 
 create view failed_party as
-select party.id as pid
-from party join all_past_cab on party.country_id = all_past_cab.cid
-where party.id not in (select in_cab.pid from in_cab where party.country_id = in_cab.cid);
+select distinct pid
+from (select pid from all_cab_all_party except select pid from in_cab) as result;
 
 create view all_cab_party_id as
 (select pid from in_cab)
