@@ -79,15 +79,17 @@ public class Assignment2 extends JDBCSubmission {
         		cabinet_query = ""
         				+ "select cabinet.id, cabinet.start_date "
         				+ "from cabinet join election on cabinet.country_id = election.country_id "
-        				+ "where cabinet.start_date >= cast( ? as date) and "
-        				+ "cabinet.start_date < (select min(e_date) from country join election on country.id = election.country_id "
-        				+ "where election.country_id = cabinet.country_id and election.country_id = ? and "
-        				+ "election.e_type = cast(? as election_type)) "
+        				+ "where cabinet.country_id = ? and cabinet.start_date >= cast( ? as date) and "
+        				+ "cabinet.start_date < (select min(e_date) from election"
+        													 	+ "where election.country_id = cabinet.country_id and "
+        													 				+ "election.e_date > ? and "
+        													 				+ "election.e_type = cast(? as election_type)) "
         				+ "order by cabinet.start_date";
         		c_statement = this.connection.prepareStatement(cabinet_query);
-            	c_statement.setString(1, date);
-            	c_statement.setInt(2, cid);
-            	c_statement.setString(3, type);
+            	c_statement.setInt(1, cid);
+            	c_statement.setString(2, date);
+            	c_statement.setString(3, date);
+            	c_statement.setString(4, type);
             	cabinet_result = c_statement.executeQuery();
             	
             	while (cabinet_result.next()) {
