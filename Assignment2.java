@@ -111,7 +111,7 @@ public class Assignment2 extends JDBCSubmission {
     	Assignment2 test;
 		try {
 			test = new Assignment2();
-			String url = "jdbc:postgresql://localhost:5432/csc343h-luke6";
+			String url = "jdbc:postgresql://localhost:5432/csc343h-luke6/";
 	    	String uid = "luke6";
 	    	String pw = "";
 	    	boolean r = test.connectDB(url, uid, pw);
