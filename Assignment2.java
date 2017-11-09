@@ -62,7 +62,7 @@ public class Assignment2 extends JDBCSubmission {
         try {
         	
         	election_query = ""
-        			+ "select election.country_id as cid, election.id as eid, eleciton.e_date as date, election.e_type as type"
+        			+ "select election.country_id as cid, election.id as eid, election.e_date as date, election.e_type as type"
         			+ "from country join election on country.id = election.country_id "
         			+ "where country.name = ? "
         			+ "order by extract(year from e_date) desc";
