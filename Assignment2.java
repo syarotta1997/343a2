@@ -22,7 +22,7 @@ public class Assignment2 extends JDBCSubmission {
     		Properties props = new Properties();
     		props.setProperty("user",username);
     		props.setProperty("password",password);
-    		//props.setProperty("currentSchema", "parlgov");
+    		props.setProperty("currentSchema", "parlgov");
     		this.connection = DriverManager.getConnection(url, props);
     		return this.connection.isValid(0);
         }
@@ -124,11 +124,13 @@ public class Assignment2 extends JDBCSubmission {
 	    		System.exit(0);
 	    	}
 	    	System.out.println("connection successful");
-	    	
-	    	test.electionSequence("Canada");
-	    	
-	    	
-	    	
+	    	String q = "select * from election";
+	    	PreparedStatement qq = test.connection.prepareStatement(q);
+	    	ResultSet rr = qq.executeQuery();
+	    	while (rr.next()) {
+	    		int id = rr.getInt("id");
+	    		System.out.println(id);
+	    	}
 	    	
 	    	boolean s = test.disconnectDB();
 	    	if (! s) {
@@ -142,6 +144,10 @@ public class Assignment2 extends JDBCSubmission {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 catch(SQLException se){
+            System.err.println("main." +
+                    "<Message>: " + se.getMessage());
+        }
     	
     	
     	
