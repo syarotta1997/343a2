@@ -32,6 +32,8 @@ select country.id as cid, party.id as pid, party_position.left_right as position
 from party right join country on party.country_id = country.id 
                  left join party_position on party.id = party_position.party_id;
 
+select * from parties_in_country;
+
 create view r0_2 as
 select cid, count(pid) as counts
 from parties_in_country as p
@@ -66,8 +68,6 @@ create view histogram as
 select r0_2.cid, r0_2.counts as r0_2, r2_4.counts as r2_4,r4_6.counts as r4_6,r6_8.counts as r6_8 ,r8_10.counts as r8_10
 from r0_2, r2_4, r4_6, r6_8, r8_10
 where r0_2.cid = r2_4.cid and r2_4.cid = r4_6.cid and r4_6.cid = r6_8.cid and r6_8.cid = r8_10.cid;
-
-select * from histogram;
 
 create view answer as
 select country.name as countryName, r0_2, r2_4, r4_6, r6_8, r8_10
