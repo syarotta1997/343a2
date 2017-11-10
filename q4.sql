@@ -29,9 +29,8 @@ DROP VIEW IF EXISTS answer CASCADE;
 -- Define views for your intermediate steps here.
 create view parties_in_country as
 select country.id as cid, party.id as pid, party_position.left_right as position
-from party join country on party.country_id = country.id 
-                 join party_position on party.id = party_position.party_id
-where party_position.left_right is not null;
+from party right join country on party.country_id = country.id 
+                 left join party_position on party.id = party_position.party_id;
 
 create view r0_2 as
 select cid, count(pid) as counts
@@ -73,9 +72,6 @@ select * from histogram;
 create view answer as
 select country.name as countryName, r0_2, r2_4, r4_6, r6_8, r8_10
 from histogram join country on histogram.cid = country.id;
-
-
-
 
 -- the answer to the query 
 INSERT INTO q4 (select * from answer);
