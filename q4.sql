@@ -37,34 +37,32 @@ select * from parties_in_country;
 create view r0_2 as
 select cid, count(pid) as counts
 from parties_in_country as p
-group by cid
-having p.position >= 0 and p.position < 2;
+where p.position >= 0 and p.position < 2
+group by cid;
 
 create view r2_4 as
 select cid, count(pid) as counts
 from parties_in_country as p
-group by cid
-having p.position >= 2 and p.position < 4;
+where p.position >= 2 and p.position < 4
+group by cid;
 
 create view r4_6 as
 select cid, count(pid) as counts
 from parties_in_country as p
-group by cid
-having p.position >= 4 and p.position < 6;
-
+where p.position >= 4 and p.position < 6
+group by cid;
 
 create view r6_8 as
 select cid, count(pid) as counts
 from parties_in_country as p
-group by cid
-having p.position >= 6 and p.position < 8;
+where p.position >= 6 and p.position < 8
+group by cid;
 
 create view r8_10 as
 select cid, count(pid) as counts
 from parties_in_country as p
-group by cid
-having p.position >= 8 and p.position < 10;
-
+where p.position >= 8 and p.position < 10
+group by cid;
 
 create view histogram as
 select r0_2.cid, r0_2.counts as r0_2, r2_4.counts as r2_4,r4_6.counts as r4_6,r6_8.counts as r6_8 ,r8_10.counts as r8_10
