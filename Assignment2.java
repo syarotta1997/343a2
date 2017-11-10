@@ -116,6 +116,38 @@ public class Assignment2 extends JDBCSubmission {
     public List<Integer> findSimilarPoliticians(Integer politicianId, Float threshold) {
         // Implement this method!
     	List<Integer> answer = new ArrayList<Integer>();
+        PreparedStatement p_statement;
+        ResultSet politician_result;
+        String p_query;
+    	try {
+    		
+    		p_query = "select p1.id as pid1, p1.description as p1des, p1.comment as p1com, "
+    					  + "p2.id as pid2, p2.description as p2des, p2.comment as p2com "
+    				+ "from politician_president as p1 , politician_president as p2 "
+    				+ "where p1.id = ? and p2.id <> p1.id  ";
+    		p_statement = this.connection.prepareStatement(p_query);
+    		p_statement.setInt(1, politicianId);
+    		politician_result = p_statement.executeQuery();
+    		System.out.println("politician query executed");
+    		while (politician_result.next()) {
+    			int id = politician_result.getInt("pid2");
+    			String p1des = politician_result.getString("p1des");
+    			String p1com = politician_result.getString("p1com");
+    			String p2des = politician_result.getString("p2des");
+    			String p2com = politician_result.getString("p2com");
+    			double des_sim = this.similarity(p1des, p2des);
+    			double com_sim = this.similarity(p1com, p2com);
+    			if (des_sim > threshold && com_sim > threshold) {
+    				answer.add(id);
+    			}
+    			
+    		}
+    		
+    	}
+    	catch(SQLException se) {
+    		System.err.println("findSimilarPoliticians." +
+                    "<Message>: " + se.getMessage());
+    	}
         return answer;
     }
 
@@ -134,7 +166,8 @@ public class Assignment2 extends JDBCSubmission {
 	    	}
 	    	
 	    	
-	    	System.out.println(test.electionSequence("Germany"));
+	    	//System.out.println(test.electionSequence("Germany"));
+	    	System.out.println(test.findSimilarPoliticians(9,(float) 0.1));
 
 
 	    	
