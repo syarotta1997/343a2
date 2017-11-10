@@ -26,7 +26,7 @@ DROP VIEW IF EXISTS answer CASCADE;
 create view elections_results as
 select country_id as cid, e1.id as eid, e2.id as rid, e2.party_id as pid, e2.alliance_id as aid
 from election as e1 join election_result as e2 on e1.id = e2.election_id
-where country_id is not null and e_type = 'Parliamentary election';
+where country_id is not null;
 
 create view alliances as
 select e1.cid, e1.pid as pid1, e2.pid as pid2, count(*) as counts
