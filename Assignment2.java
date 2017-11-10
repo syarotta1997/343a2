@@ -135,7 +135,9 @@ public class Assignment2 extends JDBCSubmission {
     			String p1com = politician_result.getString("p1com");
     			String p2des = politician_result.getString("p2des");
     			String p2com = politician_result.getString("p2com");
-    			System.out.println("id: "+id + " "+p1des + " " + p2des + " "+p1com+" "+p2com);
+    			
+    			System.out.println("id: \n"+id + "p1des: \n"+p1des + "p2 des: \n" + p2des + "p1com \n "+p1com+"p2com \n"+p2com);
+    			
     			double des_sim = this.similarity(p1des, p2des);
     			double com_sim = this.similarity(p1com, p2com);
     			if (des_sim > threshold && com_sim > threshold) {
