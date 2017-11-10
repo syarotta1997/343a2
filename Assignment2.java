@@ -100,7 +100,7 @@ public class Assignment2 extends JDBCSubmission {
                     cabinets.add(cab_id);
             	}
             	
-            	System.out.println("\n");
+//            	System.out.println("\n");
             	
         	}
         	answer = new ElectionCabinetResult(elections,cabinets);
@@ -128,7 +128,7 @@ public class Assignment2 extends JDBCSubmission {
     		p_statement = this.connection.prepareStatement(p_query);
     		p_statement.setInt(1, politicianId);
     		politician_result = p_statement.executeQuery();
-    		System.out.println("politician query executed");
+//    		System.out.println("politician query executed");
     		while (politician_result.next()) {
     			int id = politician_result.getInt("pid2");
     			String p1des = politician_result.getString("p1des");
@@ -137,8 +137,7 @@ public class Assignment2 extends JDBCSubmission {
     			String p2com = politician_result.getString("p2com");
     			
 //    			System.out.println("id: "+id+"\n" + "p1des: \n"+p1des +"\n" 
-//    			+ "p2 des: \n" + p2des +"\n" + "p1com: \n "+p1com+"\n"+"p2com: \n"+p2com+"\n");
-    			
+//    			+ "p2 des: \n" + p2des +"\n" + "p1com: \n "+p1com+"\n"+"p2com: \n"+p2com+"\n");   			
     			double des_sim = this.similarity(p1des, p2des);
     			double com_sim = this.similarity(p1com, p2com);
     			if (des_sim > threshold && com_sim > threshold) {
