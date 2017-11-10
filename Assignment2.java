@@ -69,13 +69,13 @@ public class Assignment2 extends JDBCSubmission {
         	e_statement = this.connection.prepareStatement(election_query);
         	e_statement.setString(1, countryName);
         	election_result = e_statement.executeQuery();
-        	System.out.println("election querty done with success");
+//        	System.out.println("election querty done with success");
         	while (election_result.next()) {
         		int election_id = election_result.getInt("eid");
         		int cid = election_result.getInt("cid");
         		String date = election_result.getString("date");
         		String type = election_result.getString("type");
-        		System.out.println("  "+election_id+"    "+date+"    "+type+"    "+cid+"\n");
+//        		System.out.println("  "+election_id+"    "+date+"    "+type+"    "+cid+"\n");
         		cabinet_query = ""
         				+ "select distinct cabinet.id, cabinet.start_date "
         				+ "from cabinet join election on cabinet.country_id = election.country_id "
@@ -95,7 +95,7 @@ public class Assignment2 extends JDBCSubmission {
             	while (cabinet_result.next()) {
             		int cab_id = cabinet_result.getInt("id");
             		String d = cabinet_result.getString("start_date");
-                    System.out.println("                "+election_id +"   "+ cab_id +"   "+ d);
+//                    System.out.println("                "+election_id +"   "+ cab_id +"   "+ d);
                     elections.add(election_id);
                     cabinets.add(cab_id);
             	}
@@ -136,8 +136,8 @@ public class Assignment2 extends JDBCSubmission {
     			String p2des = politician_result.getString("p2des");
     			String p2com = politician_result.getString("p2com");
     			
-    			System.out.println("id: "+id+"\n" + "p1des: \n"+p1des +"\n" 
-    			+ "p2 des: \n" + p2des +"\n" + "p1com \n "+p1com+"\n"+"p2com \n"+p2com+"\n");
+//    			System.out.println("id: "+id+"\n" + "p1des: \n"+p1des +"\n" 
+//    			+ "p2 des: \n" + p2des +"\n" + "p1com: \n "+p1com+"\n"+"p2com: \n"+p2com+"\n");
     			
     			double des_sim = this.similarity(p1des, p2des);
     			double com_sim = this.similarity(p1com, p2com);
@@ -170,7 +170,7 @@ public class Assignment2 extends JDBCSubmission {
 	    	}
 	    	
 	    	
-	    	//System.out.println(test.electionSequence("Germany"));
+	    	System.out.println(test.electionSequence("Germany"));
 	    	System.out.println(test.findSimilarPoliticians(148,(float) 0.0));
 
 
