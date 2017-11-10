@@ -167,7 +167,7 @@ public class Assignment2 extends JDBCSubmission {
 	    	
 	    	
 	    	//System.out.println(test.electionSequence("Germany"));
-	    	System.out.println(test.findSimilarPoliticians(9,(float) 0.1));
+	    	System.out.println(test.findSimilarPoliticians(9,(float) 0.0));
 
 
 	    	
